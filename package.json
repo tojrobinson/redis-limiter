@@ -1,0 +1,30 @@
+{
+  "name": "redis-limiter",
+  "version": "1.0.3",
+  "description": "A simple and efficient Node.js + redis based rate limiter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tojrobinson/redis-limiter.git"
+  },
+  "keywords": [
+    "redis",
+    "rate",
+    "limit",
+    "throttle",
+    "limiter"
+  ],
+  "author": {
+    "email": "tully@tully.io",
+    "name": "Tully Robinson",
+    "url": "http://tully.io"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tojrobinson/redis-limiter/issues"
+  },
+  "homepage": "https://github.com/tojrobinson/redis-limiter"
+}
