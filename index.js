@@ -39,7 +39,9 @@ RedisLimiter.prototype.hasLimit = function(lim) {
 
 RedisLimiter.prototype.limit = function(lim, user, cb) {
    if (!limits.hasOwnProperty(lim)) {
-      return cb(null, null);
+      return process.nextTick(function() {
+         cb(null, null);
+      });
    }
 
    var redis = this.redis;
