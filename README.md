@@ -4,12 +4,12 @@ A simple and efficient Node.js + redis based rate limiter.
 ## Examples
 #### Express app request limiter
 
-```
+```js
 var redis = require('redis');
 var client = redis.createClient();
 var RedisLimiter = require('redis-limiter');
 var limiter = new RedisLimiter({
-   client: redis,
+   client: client,
    prefix: 'lim'
 });
 
@@ -41,20 +41,22 @@ app.get('/api/*', function(req, res, next) {
 
 ```
 
-##API
-####Constructor(opt): RedisLimiter
+## API
+#### Constructor(opt): RedisLimiter
 `opt.client` The redis client object.<br>
 `opt.prefix` The key prefix for entries into your redis store (default: 'lim').<br>
-`opt.limits` Initialise all limits with a map of limit objects (alternative to using the `add` method for each limit).
+`opt.limits` Initialise all limits with a single object that maps `name` -> `opt`. This is an alternative to calling the `add` method for each limit.
 
-####add(lim, opt): undefined
-Add a single limit object with name `lim`, having `interval` and `limit` properties defined within `opt`.
+#### add(name, opt): undefined
+Add a single limit object with name `name`, having `interval` and `limit` properties defined within `opt`.
 
-####remove(lim): undefined
-Remove a limit object with name `lim`.
+#### remove(name): undefined
+Remove a limit object.
 
-####hasLimit(lim): Boolean
-Test if limit object with name `lim` exists.
+#### hasLimit(name): Boolean
+Test if a limit object exists.
 
-####limit(lim, user, cb): undefined
-Increment the usage count for `lim` by `user` for the current interval. If the current interval has expired or does not exist, a new one is created. The callback function receives and error object and a result object as arguments. The result object will contain the fields: `exceeded:Boolean` and `count:Number` indicating whether or not the action's limit was exceeded and the count for the current interval respectively.
+#### limit(name, user, cb): undefined
+Increment a particular user's usage count for a limit object on the current interval. If the current interval does not exist or has expired, a new one is created.
+
+The callback function receives an error object and a result object as arguments. The result object will contain the fields: `exceeded:Boolean` and `count:Number` indicating whether or not the action's limit was exceeded and the count for the current interval respectively.

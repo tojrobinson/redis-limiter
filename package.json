@@ -1,6 +1,6 @@
 {
   "name": "redis-limiter",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "A simple and efficient Node.js + redis based rate limiter",
   "main": "index.js",
   "scripts": {
